@@ -3,6 +3,7 @@ package com.reactproject;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.wix.RNCameraKit.RNCameraKitPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new NetInfoPackage(),
             new RNGestureHandlerPackage(),
             new RNCameraKitPackage(),
               new SplashScreenReactPackage()  //here

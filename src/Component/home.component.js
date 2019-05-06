@@ -11,6 +11,12 @@ export default class HomeComponent extends Component {
         // do stuff while splash screen is shown
         // After having done stuff (such as async tasks) hide the splash screen
         SplashScreen.hide();
+        setTimeout(() => {
+            //this.state.isLoading= false
+            newState = this.state;
+            newState.isLoading = false;
+            this.setState(newState)
+        }, 3000);
     }
     static navigationOptions = ({ navigation }) => {
         navigation.title = "HomeComponent"
@@ -22,26 +28,25 @@ export default class HomeComponent extends Component {
             text: '',
         }
     }
-    componentDidMount() {
-        setTimeout(() => {
-            //this.state.isLoading= false
-            newState=this.state;
-            newState.isLoading=false;
-        this.setState(newState)
-        }, 3000);
-      }
+    // componentDidMount() {
+
+    //   }
 
     render() {
-     
-        if (this.state.isLoading==true) {
+        //Spinner
+        if (this.state.isLoading == true) {
             return (
                 <View style={{ flex: 1, paddingTop: 50 }}>
-                    <ActivityIndicator size="large" color="#0000ff"  />
+                    <ActivityIndicator size="large" color="#0000ff" />
                 </View>
             );
+
         }
+
+        //Data after rendering
         return (
             < View>
+
                 <Button
                     title='Scanner'
                     onPress={() => this.props.navigation.navigate('ScannerComponent')}
@@ -52,6 +57,7 @@ export default class HomeComponent extends Component {
                     onPress={() => this.props.navigation.navigate('SearchComponent')}
 
                 />
+           
 
                 <Text> </Text>
 
@@ -60,6 +66,18 @@ export default class HomeComponent extends Component {
                     onPress={() => this.props.navigation.navigate('ProductList')}
 
                 />
+
+                <Text> </Text>
+
+                <Button
+                    title='AsyncView'
+                    onPress={() => this.props.navigation.navigate('AsyncView')}
+
+                />
+
+                <Text> </Text>
+          
+
 
                 {/* <Button
                     title="Location"

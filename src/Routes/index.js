@@ -3,6 +3,8 @@ import ScannerComponent from '../Component/scanner.component';
 import SearchComponent from '../Component/search.component';
 import HomeComponent from '../Component/home.component';
 import ProductList from '../Component/ProductList';
+import AsyncView from '../Component/AsyncView'
+
 const Route = createStackNavigator(
     {
 
@@ -10,6 +12,8 @@ const Route = createStackNavigator(
         ScannerComponent: ScannerComponent,   
         HomeComponent:HomeComponent,
         ProductList:ProductList,
+        AsyncView:AsyncView
+
     },
     {
         initialRouteName: "HomeComponent"
