@@ -3,7 +3,6 @@ import ScannerComponent from '../Component/scanner.component';
 import SearchComponent from '../Component/search.component';
 import HomeComponent from '../Component/home.component';
 import ProductList from '../Component/ProductList';
-
 const Route = createStackNavigator(
     {
 

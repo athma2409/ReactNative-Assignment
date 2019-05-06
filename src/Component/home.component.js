@@ -3,29 +3,48 @@
 //QrCodeScxanner :=> https://aboutreact.com/react-native-scan-qr-code/
 
 import React, { Component } from 'react';
-import { View, Text,Button} from 'react-native';
+import { View, Text, Button, ActivityIndicator } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'
 
 export default class HomeComponent extends Component {
     componentDidMount() {
         // do stuff while splash screen is shown
-          // After having done stuff (such as async tasks) hide the splash screen
-          SplashScreen.hide();
-      }
+        // After having done stuff (such as async tasks) hide the splash screen
+        SplashScreen.hide();
+    }
     static navigationOptions = ({ navigation }) => {
         navigation.title = "HomeComponent"
     }
     constructor() {
         super()
+        this.state = {
+            isLoading: true,
+            text: '',
+        }
     }
+    componentDidMount() {
+        setTimeout(() => {
+            //this.state.isLoading= false
+            newState=this.state;
+            newState.isLoading=false;
+        this.setState(newState)
+        }, 3000);
+      }
 
- 
     render() {
+     
+        if (this.state.isLoading==true) {
+            return (
+                <View style={{ flex: 1, paddingTop: 50 }}>
+                    <ActivityIndicator size="large" color="#0000ff"  />
+                </View>
+            );
+        }
         return (
             < View>
                 <Button
                     title='Scanner'
-                    onPress={()=>this.props.navigation.navigate('ScannerComponent')}
+                    onPress={() => this.props.navigation.navigate('ScannerComponent')}
                 />
                 <Text> </Text>
                 <Button
@@ -47,7 +66,7 @@ export default class HomeComponent extends Component {
                     onPress={() => this.props.navigation.navigate('GeoLocationComponent')} /> */}
             </View>
 
-   
+
 
         )
     }

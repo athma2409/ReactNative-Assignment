@@ -1,7 +1,7 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet} from 'react-native';
+import { Text, View, Linking,ActivityIndicator, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet } from 'react-native';
 // import all basic components
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 //import CameraKitCameraScreen we are going to use.
@@ -9,13 +9,18 @@ import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import SplashScreen from 'react-native-splash-screen'
 
 export default class ScannerComponent extends Component {
-    static navigationOptions = ({ navigation }) => {
-        navigation.title = "ScannerComponent"
-    }
-    componentDidMount() {
+  static navigationOptions = ({ navigation }) => {
+    navigation.title = "ScannerComponent"
+  }
+  componentDidMount() {
     // do stuff while splash screen is shown
-      // After having done stuff (such as async tasks) hide the splash screen
-      SplashScreen.hide();
+    // After having done stuff (such as async tasks) hide the splash screen
+    SplashScreen.hide();
+    setTimeout(() => {
+      presentState=this.state
+      presentState.isLoading=false;
+      this.setState(presentState);
+    }, 3000);
   }
   constructor() {
     super();
@@ -23,6 +28,9 @@ export default class ScannerComponent extends Component {
       //variable to hold the qr value
       qrvalue: '',
       opneScanner: false,
+      isLoading: true,
+      text: ''
+
     };
   }
   onOpenlink() {
@@ -36,13 +44,13 @@ export default class ScannerComponent extends Component {
     this.setState({ opneScanner: false });
   }
   onOpneScanner() {
-    var that =this;
+    var that = this;
     //To Start Scanning
-    if(Platform.OS === 'android'){
+    if (Platform.OS === 'android') {
       async function requestCameraPermission() {
         try {
           const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.CAMERA,{
+            PermissionsAndroid.PERMISSIONS.CAMERA, {
               'title': 'CameraExample App Camera Permission',
               'message': 'CameraExample App needs access to your camera '
             }
@@ -55,43 +63,53 @@ export default class ScannerComponent extends Component {
             alert("CAMERA permission denied");
           }
         } catch (err) {
-          alert("Camera permission err",err);
+          alert("Camera permission err", err);
           console.warn(err);
         }
       }
       //Calling the camera permission function
       requestCameraPermission();
-    }else{
+    } else {
       that.setState({ qrvalue: '' });
       that.setState({ opneScanner: true });
-    }    
+    }
   }
+
   render() {
+
+    if(this.state.isLoading==true){
+      return(
+        <View style={{ flex: 1, paddingTop: 50 }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+      )
+    }
     let displayModal;
     //If qrvalue is set then return this view
     if (!this.state.opneScanner) {
       return (
         <View style={styles.container}>
-            <Text style={styles.heading}>React Native QR Code Example</Text>
-            <Text style={styles.simpleText}>{this.state.qrvalue ? 'Scanned QR Code: '+this.state.qrvalue : ''}</Text>
-            {this.state.qrvalue.includes("http") ? 
-              <TouchableHighlight
-                onPress={() => this.onOpenlink()}
-                style={styles.button}>
-                  <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Open Link</Text>
-              </TouchableHighlight>
-              : null
-            }
+          <Text style={styles.heading}>React Native QR Code Example</Text>
+          <Text style={styles.simpleText}>{this.state.qrvalue ? 'Scanned QR Code: ' + this.state.qrvalue : ''}</Text>
+          {this.state.qrvalue.includes("http") ?
             <TouchableHighlight
-              onPress={() => this.onOpneScanner()}
+              onPress={() => this.onOpenlink()}
               style={styles.button}>
-                <Text style={{ color: '#FFFFFF', fontSize: 12 }}>
-                Open QR Scanner
-                </Text>
+              <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Open Link</Text>
             </TouchableHighlight>
+            : null
+          }
+          <TouchableHighlight
+            onPress={() => this.onOpneScanner()}
+            style={styles.button}>
+            <Text style={{ color: '#FFFFFF', fontSize: 12 }}>
+              Open QR Scanner
+                </Text>
+          </TouchableHighlight>
         </View>
       );
     }
+
     return (
       <View style={{ flex: 1 }}>
         <CameraKitCameraScreen
@@ -118,27 +136,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'white'
+    backgroundColor: 'white'
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#2c3539',
     padding: 10,
-    width:300,
-    marginTop:16
+    width: 300,
+    marginTop: 16
   },
-  heading: { 
-    color: 'black', 
-    fontSize: 24, 
-    alignSelf: 'center', 
-    padding: 10, 
-    marginTop: 30 
+  heading: {
+    color: 'black',
+    fontSize: 24,
+    alignSelf: 'center',
+    padding: 10,
+    marginTop: 30
   },
-  simpleText: { 
-    color: 'black', 
-    fontSize: 20, 
-    alignSelf: 'center', 
-    padding: 10, 
+  simpleText: {
+    color: 'black',
+    fontSize: 20,
+    alignSelf: 'center',
+    padding: 10,
     marginTop: 16
   }
 });
