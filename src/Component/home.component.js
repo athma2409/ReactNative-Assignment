@@ -115,7 +115,7 @@ export default class HomeComponent extends Component {
                 <Text> </Text>
 
                 <Button
-                    title='ProductList'
+                    title='ProductList_with Search-Filter'
                     onPress={() => this.props.navigation.navigate('ProductList')}
 
                 />
@@ -123,12 +123,17 @@ export default class HomeComponent extends Component {
                 <Text> </Text>
 
                 <Button
-                    title='AsyncView'
+                    title='AsyncView_01'
                     onPress={() => this.props.navigation.navigate('AsyncView')}
 
                 />
 
                 <Text> </Text>
+                <Button
+                    title='AsyncStorage_02'
+                    onPress={() => this.props.navigation.navigate('AsyncStorage_02')}
+
+                />
                 <Text> </Text>
 
                 <Button

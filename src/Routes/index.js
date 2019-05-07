@@ -4,7 +4,9 @@ import SearchComponent from '../Component/search.component';
 import HomeComponent from '../Component/home.component';
 import ProductList from '../Component/ProductList';
 import AsyncView from '../Component/AsyncView'
-import NteworkInfo from '../Component/NetworkInfo'
+import NteworkInfo from '../Component/NetworkInfo';
+import AsyncStorage_02 from '../Component/AsyncStorage_02';
+
 const Route = createStackNavigator(
     {
 
@@ -13,7 +15,8 @@ const Route = createStackNavigator(
         HomeComponent:HomeComponent,
         ProductList:ProductList,
         AsyncView:AsyncView,
-        NteworkInfo:NteworkInfo
+        NteworkInfo:NteworkInfo,
+        AsyncStorage_02:AsyncStorage_02
 
     },
     {
