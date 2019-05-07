@@ -4,7 +4,7 @@ import SearchComponent from '../Component/search.component';
 import HomeComponent from '../Component/home.component';
 import ProductList from '../Component/ProductList';
 import AsyncView from '../Component/AsyncView'
-
+import NteworkInfo from '../Component/NetworkInfo'
 const Route = createStackNavigator(
     {
 
@@ -12,7 +12,8 @@ const Route = createStackNavigator(
         ScannerComponent: ScannerComponent,   
         HomeComponent:HomeComponent,
         ProductList:ProductList,
-        AsyncView:AsyncView
+        AsyncView:AsyncView,
+        NteworkInfo:NteworkInfo
 
     },
     {
